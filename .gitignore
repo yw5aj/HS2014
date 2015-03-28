@@ -13,6 +13,8 @@
 
 # Binaries
 *.zip
+*.docx
+*.xlsx
 
 # Archive
 *archive
