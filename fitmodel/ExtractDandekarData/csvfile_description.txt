@@ -1,0 +1,1 @@
+Description: first 4 lines are the frames coordinate, in pixels, ccw starting from origin. Next 4 lines are the coordinates for the previous 4 points, in units of mm (x axis) and N (y axis).

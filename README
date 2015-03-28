@@ -1,0 +1,44 @@
+This is the folder including Abaqus scripts for the Eurohaptics 2014 paper entitled "Computational Modeling Reinforces that Proprioceptive Cues May Augment Compliance Discrimination When Elasticity Is Decoupled From Radius of Curvature".
+
+All *.py files are Python 2.6 scripts and modules to perform the analysis.
+
+./
+
+abqimport.py
+Common imports for Abaqus analysis as well as numpy as os.
+
+constants.py
+Constants.
+
+commontools.py
+Shared tools for Abaqus model running, odb analysis and plotting.
+
+scriptsTemp.py
+Temporary scripts
+
+./analysis
+Package to extract simulation results.
+
+./createmodel
+Package to create model geometry and material
+
+./fig
+Figure creation.
+
+./fitmodel
+Model fitting codes.
+
+./getgeometry
+To extract the 3D model for gemoetry
+
+./odbs
+Folder to save odb files
+
+./pickles
+Folder to save python serialization files.
+
+./readodb
+To extract data from odb file.
+
+./sim
+To run simulation analysis in Abaqus. 
