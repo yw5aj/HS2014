@@ -6,6 +6,11 @@ import sim.cylinderas, sim.sphereas
 from readodb.odbtools import getWholeModelOutput
 
 # Model already done
+inputDictTest = {
+    'cylinder': (
+        (24.39e3, 17.5e-3, 10e-3), ),
+    'sphere': (
+        (24.39e3, 17.5e-3, 10e-3), )}
 inputDict0306 = {
     'cylinder': (
         (28.2e3, 17.5e-3, 35e-3),
@@ -15,10 +20,10 @@ inputDict0306 = {
         (5e3, 17.5e-3, 35e-3),
         (100e3, 17.5e-3, 35e-3)),
     'sphere': (
-        (28.2e3, 5e-3, 35e-3),
-        (56.9e3, 5e-3, 35e-3),
-        (28.2e3, 10e-3, 35e-3),
-        (56.9e3, 10e-3, 35e-3))}
+        (28.2e3, 5e-3),
+        (56.9e3, 5e-3),
+        (28.2e3, 10e-3),
+        (56.9e3, 10e-3))}
 inputDict0308 = {
     'cylinder': (
         (10e3, 17.5e-3, 35e-3),
@@ -30,12 +35,12 @@ inputDict0308 = {
         (200e3, 10e-3, 35e-3),
         (1e8, 10e-3, 35e-3)),
     'sphere': (
-        (100e3, 2e-3, 35e-3),
-        (200e3, 2e-3, 35e-3),
-        (1e8, 2e-3, 35e-3),
-        (100e3, 5e-3, 35e-3),
-        (200e3, 5e-3, 35e-3),
-        (1e8, 5e-3, 35e-3))}
+        (100e3, 2e-3),
+        (200e3, 2e-3),
+        (1e8, 2e-3),
+        (100e3, 5e-3),
+        (200e3, 5e-3),
+        (1e8, 5e-3))}
 inputDict0326 = {
     'cylinder': (
         (24.39e3, 17.5e-3, 10e-3),
@@ -53,7 +58,7 @@ def runModels(inputDict, fakeRun=False):
             if type == 'cylinder':
                 model = sim.cylinderas.unittest(G=G, radius=radius, height=height, fakeRun=fakeRun)
             elif type == 'sphere':
-                model = sim.sphereas.unittest(G=G, radius=radius, height=height, fakeRun=fakeRun)
+                model = sim.sphereas.unittest(G=G, radius=radius, fakeRun=fakeRun)
             modelNameList.append(model.modelName)
     return modelNameList
 
@@ -63,6 +68,6 @@ def readModels(modelNameList):
 
 
 if __name__ == '__main__':
-    modelNameList = runModels(inputDict0326)
-    readModels(modelNameList)
+    modelNameList = runModels(inputDictTest, fakeRun=True)
+    # readModels(modelNameList)
 

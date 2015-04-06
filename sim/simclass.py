@@ -18,9 +18,9 @@ class BaseSimClass:
     def __init__(self, baseModelName):
         self.baseModelName = baseModelName
         if baseModelName == 'pe':
-            setpe.main()
+            setpe.setpe()
         elif baseModelName == 'as':
-            setas.main()
+            setas.setas()
         for key in mdb.models.keys():
             if key.startswith('Model-'):
                 del mdb.models[key]

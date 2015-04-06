@@ -1,6 +1,7 @@
 from abqimport import *
 import setpe
 import setas
+from getgeom import XCALIB, XHAUSER
 
 def buildBase(baseModelName='both'):
     """
@@ -13,12 +14,12 @@ def buildBase(baseModelName='both'):
         Name of the base model, either 'pe' or 'as', or 'both'.
     """
     if baseModelName == 'pe':
-        setpe.main()
+        setpe.setpe(xcontact=XCALIB)
     elif baseModelName=='as':
-        setas.main()
+        setas.setas(xcontact=XHAUSER)
     elif baseModelName=='both':
-        setpe.main()
-        setas.main()
+        setpe.setpe(xcontact=XCALIB)
+        setas.setas(xcontact=XHAUSER)
     for modelName in mdb.models.keys():
         if modelName.startswith('Model-'):
             del mdb.models[modelName]

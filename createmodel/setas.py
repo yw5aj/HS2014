@@ -1,15 +1,16 @@
 from abqimport import *
 import numpy as np
 from createtools import setNH
+from getgeom import getAsGeom, XCALIB, XHAUSER
 
 # Define globals
 from constants import GArrayAverage as GList
 modelName = 'as'
 
-def main():
-    contourCoordList = [[] for i in range(5)]    
-    for i in range(5):
-        contourCoordList[i] = np.genfromtxt('./createmodel/csv/axisymCoordList'+str(i)+'.csv',delimiter=',') * 1e-3
+def setas(xcontact=XHAUSER):
+    contourCoordList = getAsGeom(xcontact=xcontact)
+    for i, contourCoord in enumerate(contourCoordList):
+        contourCoordList[i] = contourCoord * 1e-3
     
     mdb.Model(name=modelName, modelType=STANDARD_EXPLICIT) # Create the model
     
@@ -39,6 +40,7 @@ def main():
     s = makeSketch(contourCoordList[4])
     p = mdb.models[modelName].Part(name='nail', dimensionality=AXISYMMETRIC, 
         type=ANALYTIC_RIGID_SURFACE)
+    s = makeSketchAxisymRigid(contourCoordList[4])
     p.AnalyticRigidSurf2DPlanar(sketch=s)
     del mdb.models[modelName].sketches['__profile__']
     
@@ -100,11 +102,11 @@ def main():
     p.seedPart(size=0.0005, deviationFactor=0.1, minSizeFactor=0.1)
     e = p.edges
     pickedEdges = e.getSequenceFromMask(mask=(
-        '[#ffffffff:2 #7fffffff #0:12 #fffffffc #7ffff ]', ), )
+        '[#ffffffff:2 #1fff ]', ), )
     p.seedEdgeBySize(edges=pickedEdges, size=0.001, deviationFactor=0.1, 
         minSizeFactor=0.1, constraint=FINER)
     pickedEdges = e.getSequenceFromMask(mask=(
-        '[#0:3 #ffffffff:5 #7fffffff #ffffffff:6 #3 ]', ), )
+        '[#0:2 #ffffe000 #ffffffff:10 #1ffff ]', ), )
     p.seedEdgeBySize(edges=pickedEdges, size=0.00025, deviationFactor=0.1, 
         minSizeFactor=0.1, constraint=FINER)
     # Define element types
@@ -124,25 +126,25 @@ def main():
     # bone_surface, nail_surface, finger_surface_bone, finger_surface_nail
     p = mdb.models[modelName].parts['bone']
     s = p.edges
-    side2Edges = s.getSequenceFromMask(mask=('[#0 #800 ]', ), )
+    side2Edges = s.getSequenceFromMask(mask=('[#80 ]', ), )
     p.Surface(side2Edges=side2Edges, name='bone_surface')
     p = mdb.models[modelName].parts['nail']
     s = p.edges
-    side1Edges = s.getSequenceFromMask(mask=('[#0 #10 ]', ), )
+    side1Edges = s.getSequenceFromMask(mask=('[#40 ]', ), )
     p.Surface(side1Edges=side1Edges, name='nail_surface')
     p = mdb.models[modelName].parts['finger']
     s = p.edges
-    side1Edges = s.getSequenceFromMask(mask=('[#0:15 #ffffffe4 #7ffff ]', ), )
+    side1Edges = s.getSequenceFromMask(mask=('[#0:12 #fffff800 #1ffff ]', ), )
     p.Surface(side1Edges=side1Edges, name='finger_surface_bone')
-    side1Edges = s.getSequenceFromMask(mask=('[#0:9 #fffffffe #ffffffff:5 #1 ]', ), 
+    side1Edges = s.getSequenceFromMask(mask=('[#0:10 #fffffff8 #ffffffff #7ff ]', ), 
         )
     p.Surface(side1Edges=side1Edges, name='finger_surface_nail')
     # contact_nodes and intermediate_nodes
     p = mdb.models[modelName].parts['finger']
     n = p.nodes
-    nodes = n.getSequenceFromMask(mask=('[#0:11 #fff80000 #ffffffff:3 ]', ), )
+    nodes = n.getSequenceFromMask(mask=('[#0:9 #ffffe000 #ffffffff:2 #1ff ]', ), )
     p.Set(nodes=nodes, name='contact_nodes')
-    nodes = n.getSequenceFromMask(mask=('[#0:5 #fffe0000 #ffffffff:2 #7fffffff #0:10 #100000 ]', ), )
+    nodes = n.getSequenceFromMask(mask=('[#0:16 #80 #0:25 #ffff8000 #ffffffff:2 #ff ]', ), )
     p.Set(nodes=nodes, name='intermediate_nodes')
     ## Set up constraints
     a = mdb.models[modelName].rootAssembly
@@ -172,7 +174,7 @@ def main():
     a = mdb.models[modelName].rootAssembly
     e1 = a.instances['finger'].edges
     edges1 = e1.getSequenceFromMask(mask=(
-        '[#0:2 #80000000 #0:5 #80000000 #1 #0:5 #1a ]', ), )
+        '[#0:2 #2000 #0:4 #1800 #0:4 #3400 ]', ), )
     region = a.Set(edges=edges1, name='finger_axis_nodes')
     mdb.models[modelName].DisplacementBC(name='symmetric_axis_finger', 
         createStepName='Initial', region=region, u1=SET, u2=UNSET, ur3=SET, 
@@ -225,4 +227,4 @@ def makeSketchAxisymRigid(coordList):
 
 
 if __name__=="__main__":
-    main()
+    setas()

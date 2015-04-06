@@ -1,16 +1,16 @@
 from abqimport import *
 import numpy as np
 from createtools import setNH
+from getgeom import getPeGeom, XCALIB, XHAUSER
 
 # Define globals
 from constants import GArrayAverage as GList
 modelName = 'pe'
 
-def main():
-    
-    contourCoordList = [[] for i in range(5)]   
-    for i in range(5):
-        contourCoordList[i] = np.genfromtxt('./createmodel/csv/rotCoordList'+str(i)+'.csv', delimiter=',') * 1e-3
+def setpe(xcontact=XCALIB):
+    contourCoordList = getPeGeom(xcontact=xcontact)
+    for i, contourCoord in enumerate(contourCoordList):
+        contourCoordList[i] = contourCoord * 1e-3
         
     mdb.Model(name=modelName, modelType=STANDARD_EXPLICIT)
     p = mdb.models[modelName].Part(name='finger', dimensionality=TWO_D_PLANAR, 
@@ -68,17 +68,17 @@ def main():
     mdb.models[modelName].HomogeneousSolidSection(name='hypodermis', 
         material='hypodermis', thickness=None)
     f = p.faces
-    faces = f.getSequenceFromMask(mask=('[#2 ]', ), )
+    faces = f.getSequenceFromMask(mask=('[#4 ]', ), )
     region = p.Set(faces=faces, name='Set-5')
     p.SectionAssignment(region=region, sectionName='epidermis', offset=0.0, 
         offsetType=MIDDLE_SURFACE, offsetField='', 
         thicknessAssignment=FROM_SECTION)
-    faces = f.getSequenceFromMask(mask=('[#1 ]', ), )
+    faces = f.getSequenceFromMask(mask=('[#2 ]', ), )
     region = p.Set(faces=faces, name='Set-6')
     p.SectionAssignment(region=region, sectionName='dermis', offset=0.0, 
         offsetType=MIDDLE_SURFACE, offsetField='', 
         thicknessAssignment=FROM_SECTION)
-    faces = f.getSequenceFromMask(mask=('[#4 ]', ), )
+    faces = f.getSequenceFromMask(mask=('[#1 ]', ), )
     region = p.Set(faces=faces, name='Set-7')
     p.SectionAssignment(region=region, sectionName='hypodermis', offset=0.0, 
         offsetType=MIDDLE_SURFACE, offsetField='', 
@@ -200,4 +200,4 @@ def collapseMeshEdge(part, elemEdges, noList, **kwargs):
 
 
 if __name__=="__main__":
-    main()
+    setpe()

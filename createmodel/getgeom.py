@@ -1,15 +1,21 @@
 import numpy as np
-import matplotlib.pyplot as plt
+import os
+try:
+    import matplotlib.pyplot as plt
+except ImportError:
+    pass
 
 
 LINEPARA = (17.366838, -9.84968, -7.13683)  # (x0, y0, slope)
 XCALIB = LINEPARA[0]
-XHOUSER = 22
+XHAUSER = 22
+CSVPATH = os.path.dirname(__file__) + '/csvs/'
 
 
 def getLinePara(x):
     # Get lower part of skin coordinates
-    coord = np.genfromtxt('./csvs/layerContourCoordList0.csv', delimiter=',')
+    coord = np.genfromtxt('%slayerContourCoordList0.csv' % CSVPATH,
+                          delimiter=',')
     coord = coord[coord[:, 1] < 0]
     coord = coord[coord[:, 0].argsort()]
     # Get Y coordinate of the contact point
@@ -90,7 +96,8 @@ def getAsGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
     layerContourCoordList = [[] for i in range(5)]
     for i in range(5):
         layerContourCoordList[i] = np.genfromtxt(
-            './csvs/layerContourCoordList' + str(i) + '.csv', delimiter=',')
+            '%slayerContourCoordList' % CSVPATH + str(i) + '.csv',
+            delimiter=',')
     # Line for the point of contact of the old model
     linePara = getLinePara(xcontact)
     y3 = layerContourCoordList[0][:, 1].min() - 1
@@ -130,7 +137,7 @@ def getAsGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
     # Save to csv
     if save_csv:
         for i in range(5):
-            np.savetxt('./csvs/axisymCoordList' + str(i) + '.csv',
+            np.savetxt('%saxisymCoordList' % CSVPATH + str(i) + '.csv',
                        finalLayerContourCoordList[i], delimiter=',')
     return finalLayerContourCoordList
 
@@ -140,7 +147,8 @@ def getPeGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
     layerContourCoordList = [[] for i in range(5)]
     for i in range(5):
         layerContourCoordList[i] = np.genfromtxt(
-            './csvs/layerContourCoordList' + str(i) + '.csv', delimiter=',')
+            '%slayerContourCoordList' % CSVPATH + str(i) + '.csv',
+            delimiter=',')
     # Get point of contact for the old model
     linePara = getLinePara(xcontact)
     y3 = layerContourCoordList[0][:, 1].min() - 1
@@ -164,7 +172,7 @@ def getPeGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
     # Save to csv
     if save_csv:
         for i in range(5):
-            np.savetxt('./csvs/rotCoordList' + str(i) + '.csv',
+            np.savetxt('%srotCoordList' % CSVPATH + str(i) + '.csv',
                        rotLayerContourCoordList[i], delimiter=',')
     return rotLayerContourCoordList
 
@@ -172,7 +180,5 @@ def getPeGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
 if __name__ == '__main__':
     plot_layers = True
     save_csv = False
-    rotLayerContourCoordList = getPeGeom(XCALIB, plot_layers=plot_layers)
-    rotLayerContourCoordList = getPeGeom(22, plot_layers=plot_layers)
-    asLayerContourCoordList = getAsGeom(XCALIB, plot_layers=plot_layers)
-    asLayerContourCoordList = getAsGeom(22, plot_layers=plot_layers)
+    rotLayerContourCoordList = getPeGeom(XHAUSER, plot_layers=plot_layers)
+    asLayerContourCoordList = getAsGeom(XHAUSER, plot_layers=plot_layers)
