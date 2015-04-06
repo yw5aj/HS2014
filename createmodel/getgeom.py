@@ -9,7 +9,7 @@ XHOUSER = 22
 
 def getLinePara(x):
     # Get lower part of skin coordinates
-    coord = np.genfromtxt('layerContourCoordList0.csv', delimiter=',')
+    coord = np.genfromtxt('./csvs/layerContourCoordList0.csv', delimiter=',')
     coord = coord[coord[:, 1] < 0]
     coord = coord[coord[:, 0].argsort()]
     # Get Y coordinate of the contact point
@@ -88,11 +88,9 @@ def getUpOfLine(coordList, linePara):
 def getAsGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
     # Read geometry from old model
     layerContourCoordList = [[] for i in range(5)]
-    for i in range(4):
+    for i in range(5):
         layerContourCoordList[i] = np.genfromtxt(
-            'layerContourCoordList' + str(i) + '.csv', delimiter=',')
-    layerContourCoordList[4] = np.genfromtxt(
-        'nailCoordList.csv', delimiter=',')
+            './csvs/layerContourCoordList' + str(i) + '.csv', delimiter=',')
     # Line for the point of contact of the old model
     linePara = getLinePara(xcontact)
     y3 = layerContourCoordList[0][:, 1].min() - 1
@@ -132,7 +130,7 @@ def getAsGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
     # Save to csv
     if save_csv:
         for i in range(5):
-            np.savetxt('./axisymCoordList' + str(i) + '.csv',
+            np.savetxt('./csvs/axisymCoordList' + str(i) + '.csv',
                        finalLayerContourCoordList[i], delimiter=',')
     return finalLayerContourCoordList
 
@@ -142,7 +140,7 @@ def getPeGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
     layerContourCoordList = [[] for i in range(5)]
     for i in range(5):
         layerContourCoordList[i] = np.genfromtxt(
-            'layerContourCoordList' + str(i) + '.csv', delimiter=',')
+            './csvs/layerContourCoordList' + str(i) + '.csv', delimiter=',')
     # Get point of contact for the old model
     linePara = getLinePara(xcontact)
     y3 = layerContourCoordList[0][:, 1].min() - 1
@@ -166,7 +164,7 @@ def getPeGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
     # Save to csv
     if save_csv:
         for i in range(5):
-            np.savetxt('./temp/rotCoordList' + str(i) + '.csv',
+            np.savetxt('./csvs/rotCoordList' + str(i) + '.csv',
                        rotLayerContourCoordList[i], delimiter=',')
     return rotLayerContourCoordList
 
