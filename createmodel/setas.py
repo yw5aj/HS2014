@@ -136,7 +136,7 @@ def setas(xcontact=XHAUSER):
     s = p.edges
     side1Edges = s.getSequenceFromMask(mask=('[#0:12 #fffff800 #1ffff ]', ), )
     p.Surface(side1Edges=side1Edges, name='finger_surface_bone')
-    side1Edges = s.getSequenceFromMask(mask=('[#0:10 #fffffff8 #ffffffff #7ff ]', ), 
+    side1Edges = s.getSequenceFromMask(mask=('[#0:7 #ffffe000 #ffffffff:4 #3ff ]', ), 
         )
     p.Surface(side1Edges=side1Edges, name='finger_surface_nail')
     # contact_nodes and intermediate_nodes

@@ -49,6 +49,20 @@ inputDict0326 = {
         (17.825e3, 17.5e-3, 10e-3),
         (18.2925e3, 17.5e-3, 10e-3),
         (26.7375e3, 17.5e-3, 10e-3),)}        
+inputDict0412 = {
+    'cylinder': (
+	(26.7375e3, 17.5e-3, 10e-3),
+	(26.7375e3*1.1, 17.5e-3, 10e-3),
+	(26.7375e3*1.2, 17.5e-3, 10e-3),
+	(26.7375e3*1.3, 17.5e-3, 10e-3),
+	(26.7375e3*1.4, 17.5e-3, 10e-3),
+    (35.65e3, 17.5e-3, 10e-3),
+	(26.7375e3*2, 17.5e-3, 10e-3),
+	(26.7375e3*1.1*2, 17.5e-3, 10e-3),
+	(26.7375e3*1.2*2, 17.5e-3, 10e-3),
+	(26.7375e3*1.3*2, 17.5e-3, 10e-3),
+	(26.7375e3*1.4*2, 17.5e-3, 10e-3),
+    (35.65e3*2, 17.5e-3, 10e-3))}        
         
 
 def runModels(inputDict, fakeRun=False):
@@ -68,6 +82,6 @@ def readModels(modelNameList):
 
 
 if __name__ == '__main__':
-    modelNameList = runModels(inputDictTest, fakeRun=True)
-    # readModels(modelNameList)
+    modelNameList = runModels(inputDict0412)
+    readModels(modelNameList)
 

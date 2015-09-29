@@ -9,7 +9,7 @@ if __name__ == '__main__':
             st_mtime = os.stat(fname).st_mtime
             st_ctime = os.stat(fname).st_ctime
             # Set utime
-            dt = 180
-            atime = st_atime - dt
-            mtime = st_mtime - dt
+            dt = 13 * 3600
+            atime = st_atime + dt
+            mtime = st_mtime + dt
             os.utime(fname, (atime, mtime))

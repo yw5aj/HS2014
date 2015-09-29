@@ -24,8 +24,8 @@ def buildAsCylinder(radius, G, height):
     makeAsCylinderTipTip(modelName)
     assembleAsCylinderTip(modelName)
     setInteraction(modelName, tipTipName)
-    setStep(modelName, timePts=np.linspace(.1, 1., 20))
-    setForceLoad(modelName, tipBaseName, magnitude=1.)
+    setStep(modelName, timePts=np.arange(.01, 1.0, .05))
+    setForceLoad(modelName, tipBaseName, magnitude=10.)
     return modelName
 
 
