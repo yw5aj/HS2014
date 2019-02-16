@@ -3,7 +3,7 @@
 from abqimport import *
 
 import numpy as np
-from scipy.optimize import minimize
+# from scipy.optimize import minimize
 
 from commontools import (deleteJob, submitJob, getR2, plotInCae, writeLine, 
     transferOdb)
@@ -118,7 +118,7 @@ def mat2r2deflection(GList, modelName, sign=1., save_data=False):
         surfaceCoordinates = getSurfaceCoordinates(jobName)
         surfaceDeflection = getSurfaceDeflection(jobName)
         for i in range(timePts.size):
-            modelData = np.column_stack((surfaceCoordinates[:, 0], surfaceDeflection[:, i+1]))
+            modelData = np.ascontiguousarray(np.column_stack((surfaceCoordinates[:, 0], surfaceDeflection[:, i+1])))
             expData = np.genfromtxt(expFileName[i],delimiter=',') * 1e-3
             r2[i] = getR2(expData, modelData)
             filePath = './fig/' + modelName + '/' + str(i+1)

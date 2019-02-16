@@ -4,7 +4,7 @@ from createtools import setNH
 
 # Define globals
 from constants import GArrayAverage as GList
-modelName = 'pe'
+modelName = 'ps'
 
 def main():
     
@@ -104,8 +104,8 @@ def main():
     f = p.faces
     pickedRegions = f.getSequenceFromMask(mask=('[#7 ]', ), )
     p.setMeshControls(regions=pickedRegions, elemShape=TRI, technique=STRUCTURED)
-    elemType1 = mesh.ElemType(elemCode=CPE4RH, elemLibrary=STANDARD)
-    elemType2 = mesh.ElemType(elemCode=CPE3H, elemLibrary=STANDARD)
+    elemType1 = mesh.ElemType(elemCode=CPS4R, elemLibrary=STANDARD)
+    elemType2 = mesh.ElemType(elemCode=CPS3, elemLibrary=STANDARD)
     faces = f.getSequenceFromMask(mask=('[#7 ]', ), )
     pickedRegions = (faces, )
     p.setElementType(regions=pickedRegions, elemTypes=(elemType1, elemType2))

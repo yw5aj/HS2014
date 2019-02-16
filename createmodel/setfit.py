@@ -5,8 +5,8 @@ from createtools import setNH, setInteraction, setStep, setDispLoad
 
 def buildAll():
     buildBase()
-    setup_rigid_d317('pe')
-    setup_rigid_d952('pe')
+    setup_rigid_d317('ps')
+    setup_rigid_d952('ps')
     setup_rigid_d635('as')
     setup_rigid_plate('as')
     regenerateAll()
@@ -27,7 +27,7 @@ def setup_rigid_d635(baseModelName='as'):
     return
 
 
-def setup_rigid_d317(baseModelName='pe'):
+def setup_rigid_d317(baseModelName='ps'):
     modelName, tipName = build_rigid_d317(baseModelName)
     setInteraction(modelName, tipName=tipName)
     setStep(modelName, timePts=np.array([.5, 1., 1.6, 2.5, 3., 3.5]))
@@ -35,7 +35,7 @@ def setup_rigid_d317(baseModelName='pe'):
     return
 
 
-def setup_rigid_d952(baseModelName='pe'):
+def setup_rigid_d952(baseModelName='ps'):
     modelName, tipName = build_rigid_d952(baseModelName)
     setInteraction(modelName, tipName=tipName)
     setStep(modelName, timePts=np.array([.6, 1.25, 1.8, 2.5, 3, 3.5]))
@@ -86,7 +86,7 @@ def build_rigid_d635(baseModelName='as'):
     return (modelName, tipName)
 
 
-def build_rigid_d317(baseModelName='pe'):
+def build_rigid_d317(baseModelName='ps'):
     tipName = 'rigid_d317_tip'
     modelName = baseModelName + '_' + tipName
     mdb.Model(name=modelName, objectToCopy=mdb.models[baseModelName])
@@ -134,7 +134,7 @@ def build_rigid_d317(baseModelName='pe'):
     return (modelName, tipName)
 
 
-def build_rigid_d952(baseModelName='pe'):
+def build_rigid_d952(baseModelName='ps'):
     tipName = 'rigid_d952_tip'
     modelName = baseModelName + '_' + tipName
     mdb.Model(name=modelName, objectToCopy=mdb.models[baseModelName])

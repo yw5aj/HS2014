@@ -137,7 +137,7 @@ def getAsGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
     return finalLayerContourCoordList
 
 
-def getPeGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
+def getPsGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
     # Read geometry from old model
     layerContourCoordList = [[] for i in range(5)]
     for i in range(5):
@@ -174,7 +174,7 @@ def getPeGeom(xcontact=XCALIB, plot_layers=False, save_csv=False):
 if __name__ == '__main__':
     plot_layers = True
     save_csv = False
-    rotLayerContourCoordList = getPeGeom(XCALIB, plot_layers=plot_layers)
-    rotLayerContourCoordList = getPeGeom(22, plot_layers=plot_layers)
+    rotLayerContourCoordList = getPsGeom(XCALIB, plot_layers=plot_layers)
+    rotLayerContourCoordList = getPsGeom(22, plot_layers=plot_layers)
     asLayerContourCoordList = getAsGeom(XCALIB, plot_layers=plot_layers)
     asLayerContourCoordList = getAsGeom(22, plot_layers=plot_layers)

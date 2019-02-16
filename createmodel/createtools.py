@@ -109,7 +109,7 @@ def setNH(materialName, modelName, G, **kwargs):
         K = 2. * G * (1. + nu) / (3. * (1. - 2. * nu))
         D1 = 2. / K
     else:
-        D1 = 2e5 / G
+        D1 = 0.081 / G
     mdb.models[modelName].Material(name=materialName)
     mdb.models[modelName].materials[materialName].Hyperelastic(
         materialType=ISOTROPIC, testData=OFF, type=NEO_HOOKE, 

@@ -1,5 +1,5 @@
 from abqimport import *
-import setpe
+import setps
 import setas
 
 def buildBase(baseModelName='both'):
@@ -10,14 +10,14 @@ def buildBase(baseModelName='both'):
     Parameters
     ----------
     baseModelName : str
-        Name of the base model, either 'pe' or 'as', or 'both'.
+        Name of the base model, either 'ps' or 'as', or 'both'.
     """
-    if baseModelName == 'pe':
-        setpe.main()
+    if baseModelName == 'ps':
+        setps.main()
     elif baseModelName=='as':
         setas.main()
     elif baseModelName=='both':
-        setpe.main()
+        setps.main()
         setas.main()
     for modelName in mdb.models.keys():
         if modelName.startswith('Model-'):

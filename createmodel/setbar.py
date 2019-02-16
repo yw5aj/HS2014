@@ -3,7 +3,7 @@ from createtools import setInteraction, setStep, setDispLoad
 from bartipnaming import (getModelNameFromBaseAndBarWidth, 
     getBarWidthFromModelName)
 
-def buildBar(width=3e-3, baseModelName='pe'):
+def buildBar(width=3e-3, baseModelName='ps'):
     modelName = getModelNameFromBaseAndBarWidth(width, baseModelName)
     if modelName in mdb.models.keys():
         del mdb.models[modelName]

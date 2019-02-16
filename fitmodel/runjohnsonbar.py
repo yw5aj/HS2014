@@ -1,17 +1,17 @@
 from createmodel.setbar import buildBar
-from sim.simclass import BarPe as BarPeSim
+from sim.simclass import BarPs as BarPsSim
 import time
 import numpy as np
 
     
 def runJohnsonBar(width=3e-3, keepOdb=True):
-    barPe = BarPeSim(width=width)
-    barPe.runModel()
+    barPs = BarPsSim(width=width)
+    barPs.runModel()
     time.sleep(5)
-    barPe.transferOdb()
-    barPe.deleteModel()
-    barPe.deleteJob()
-    barPe.extractModelOutputs()
+    barPs.transferOdb()
+    barPs.deleteModel()
+    barPs.deleteJob()
+    barPs.extractModelOutputs()
     if not keepOdb:
-        barPe.deleteOdb()
+        barPs.deleteOdb()
     return

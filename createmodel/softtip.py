@@ -47,7 +47,7 @@ def buildAsSphere(radius, G):
     return modelName
 
 
-def buildPeCylinder():
+def buildPsCylinder():
     pass
 
 

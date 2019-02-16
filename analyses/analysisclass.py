@@ -82,13 +82,13 @@ class SphereAs(BaseAnalysisClass):
         return
 
 
-class BarPe(BaseAnalysisClass):
+class BarPs(BaseAnalysisClass):
     
     def __init__(self, **kwargs):
         if 'width' in kwargs:
             self.width = kwargs['width']
             self.modelName = getModelNameFromBaseAndBarWidth(width=self.width,
-                baseModelName='pe')
+                baseModelName='ps')
             self.jobName = self.modelName
         elif 'jobName' in kwargs:
             self.jobName = kwargs['jobName']

@@ -1,7 +1,7 @@
 from abqimport import *
 from commontools import (runModels, deleteJob, transferOdb, submitJob, 
     deleteModel)
-from createmodel import setas, setpe
+from createmodel import setas, setps
 from readodb.odbtools import (getSurfaceCoordinates, getSurfaceDeflection,
     getTipForceDisp, getMcncNodeDistribution, getTimePts, getMcncNodeCoordinates,
     openOdb_ )
@@ -17,8 +17,8 @@ class BaseSimClass:
     
     def __init__(self, baseModelName):
         self.baseModelName = baseModelName
-        if baseModelName == 'pe':
-            setpe.main()
+        if baseModelName == 'ps':
+            setps.main()
         elif baseModelName == 'as':
             setas.main()
         for key in mdb.models.keys():
@@ -140,13 +140,13 @@ class SphereAs(BaseSimClass):
         return
     
 
-class BarPe(BaseSimClass):
+class BarPs(BaseSimClass):
     
     def __init__(self, width, overwrite=True):
         # Initialize model parameters
-        BaseSimClass.__init__(self, 'pe')
+        BaseSimClass.__init__(self, 'ps')
         self.width = width
-        self.modelName = buildBar(width=3e-3, baseModelName='pe')
+        self.modelName = buildBar(width=3e-3, baseModelName='ps')
         self.jobName = self.modelName
         self.overwrite = overwrite
         return

@@ -1,7 +1,7 @@
 import re
 
 
-def getModelNameFromBaseAndBarWidth(width, baseModelName='pe'):
+def getModelNameFromBaseAndBarWidth(width, baseModelName='ps'):
     modelName = baseModelName + '_w' + str(int(width*1e5))+'_btip'
     return modelName
 
