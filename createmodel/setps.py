@@ -70,17 +70,17 @@ def main():
     f = p.faces
     faces = f.getSequenceFromMask(mask=('[#2 ]', ), )
     region = p.Set(faces=faces, name='Set-5')
-    p.SectionAssignment(region=region, sectionName='epidermis', offset=0.0, 
+    p.SectionAssignment(region=region, sectionName='dermis', offset=0.0, 
         offsetType=MIDDLE_SURFACE, offsetField='', 
         thicknessAssignment=FROM_SECTION)
     faces = f.getSequenceFromMask(mask=('[#1 ]', ), )
     region = p.Set(faces=faces, name='Set-6')
-    p.SectionAssignment(region=region, sectionName='dermis', offset=0.0, 
+    p.SectionAssignment(region=region, sectionName='hypodermis', offset=0.0, 
         offsetType=MIDDLE_SURFACE, offsetField='', 
         thicknessAssignment=FROM_SECTION)
     faces = f.getSequenceFromMask(mask=('[#4 ]', ), )
     region = p.Set(faces=faces, name='Set-7')
-    p.SectionAssignment(region=region, sectionName='hypodermis', offset=0.0, 
+    p.SectionAssignment(region=region, sectionName='epidermis', offset=0.0, 
         offsetType=MIDDLE_SURFACE, offsetField='', 
         thicknessAssignment=FROM_SECTION)    
     

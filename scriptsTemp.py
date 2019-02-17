@@ -14,8 +14,8 @@ import createmodel.setfit
 createmodel.setfit.buildAll()
 
 import fitmodel.deflection
-fitmodel.deflection.exhaust('pe_rigid_d317_tip')
-fitmodel.deflection.exhaust('pe_rigid_d952_tip')
+fitmodel.deflection.exhaust('ps_rigid_d317_tip')
+fitmodel.deflection.exhaust('ps_rigid_d952_tip')
 
 import fitmodel.magnitude
 fitmodel.magnitude.autoOptimize()

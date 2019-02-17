@@ -4,6 +4,10 @@
 *.pyc
 *.pkl
 *.cae
+*.guiState*
+*.log
+*.rec
+Job-1.*
 
 # Figures
 *.png

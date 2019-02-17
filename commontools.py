@@ -1,6 +1,7 @@
 from abqimport import *
 import os, shutil
 import numpy as np
+import uuid
 
 
 def writeLine(filePath, line):
@@ -66,9 +67,12 @@ def deleteJob(jobName):
     for fileName in os.listdir('.'):
         if fileName.startswith(jobName):
             try:
-                os.remove(fileName)
+                if os.path.isdir(fileName):
+                    shutil.rmtree(fileName)
+                elif not os.path.isdir(fileName):
+                    os.remove(fileName)
             except WindowsError:
-                jobName = jobName + '1'
+                jobName = jobName + str(uuid.uuid4().hex)[:5]
     return jobName
 
 
